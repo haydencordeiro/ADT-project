@@ -32,6 +32,14 @@
         <label for="total_employment_in_africa">Total employment in Africa 2010-2021(In Millions):</label>
         <input type="range" name="total_employment_in_africa" id="total_employment_in_africa" min="365" max="700" value="50"><br>
         
+                
+        <label for="import_us_thousand">Imports Africa:</label>
+        <input type="range" name="import_us_thousand" id="import_us_thousand" min="64129944.02" max="6412994004.02" value="50"><br>
+        
+                
+        <label for="export_us_thousand">Exports Africa:</label>
+        <input type="range" name="export_us_thousand" id="export_us_thousand" min="48162177.52 " max="6412994004.02" value="50"><br>
+        
         <button type="submit">Submit</button>
     </form>
     
@@ -50,6 +58,8 @@
             const share_of_agricultural_land = document.getElementById('share_of_agricultural_land').value;
             const people_employed_in_agriculture = document.getElementById('people_employed_in_agriculture').value;
             const total_employment_in_africa = document.getElementById('total_employment_in_africa').value;
+            const import_us_thousand = document.getElementById('import_us_thousand').value;
+            const export_us_thousand = document.getElementById('export_us_thousand').value;
             
             // Send POST request to Flask app
             fetch('/', {
@@ -66,6 +76,8 @@
                     share_of_agricultural_land: share_of_agricultural_land,
                     people_employed_in_agriculture: people_employed_in_agriculture,
                     total_employment_in_africa: total_employment_in_africa,
+                    import_us_thousand:import_us_thousand,
+                    export_us_thousand:export_us_thousand
                 }),
             })
             .then(response => response.json())
