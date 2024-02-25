@@ -1,91 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ML Prediction</title>
-</head>
-<body>
+    <style>
+      canvas {
+        border: 1px solid #000;
+      }
+    </style>
+  </head>
+  <body>
     <h1>Machine Learning Prediction</h1>
     <form id="prediction-form">
-        <label for="year">Year:</label>
-        <input type="number" name="year" id="year" min="2023" max="2040" required><br>
-        
-        <label for="population">Population:</label>
-        <input type="range" name="population" id="population" min="0" max="2399609273" value="2399609273"><br>
-        
-        <label for="unemployment_above_15">Unemployment Above age 15:</label>
-        <input type="range" name="unemployment_above_15" id="unemployment_above_15" min="0" max="100" value="50"><br>
-        
-        <label for="unemployment_between_15_24">Unemployment between age 15-24:</label>
-        <input type="range" name="unemployment_between_15_24" id="unemployment_between_15_24" min="0" max="100" value="50"><br>
-        
-        <label for="unemployment_above_25">Unemployment Above age 25+:</label>
-        <input type="range" name="unemployment_above_25" id="unemployment_above_25" min="0" max="100" value="50"><br>
-        
-        <label for="share_of_agricultural_land">Share of agricultural land in South Africa 2000-2020 in percentage:</label>
-        <input type="range" name="share_of_agricultural_land" id="share_of_agricultural_land" min="0" max="100" value="50"><br>
-        
-        <label for="people_employed_in_agriculture">People employed in agricultural sector in millions:</label>
-        <input type="range" name="people_employed_in_agriculture" id="people_employed_in_agriculture" min="0" max="200" step="1" value="5"><br>
-        
-        <label for="total_employment_in_africa">Total employment in Africa 2010-2021(In Millions):</label>
-        <input type="range" name="total_employment_in_africa" id="total_employment_in_africa" min="365" max="700" value="50"><br>
-        
-                
-        <label for="import_us_thousand">Imports Africa:</label>
-        <input type="range" name="import_us_thousand" id="import_us_thousand" min="64129944.02" max="6412994004.02" value="50"><br>
-        
-                
-        <label for="export_us_thousand">Exports Africa:</label>
-        <input type="range" name="export_us_thousand" id="export_us_thousand" min="48162177.52 " max="6412994004.02" value="50"><br>
-        
-        <button type="submit">Submit</button>
+      <label for="year">Year:</label>
+      <input
+        type="number"
+        name="year"
+        id="year"
+        min="2023"
+        max="2040"
+        required
+      /><br />
+
+      <label for="population">Population:</label>
+      <input
+        type="range"
+        name="population"
+        id="population"
+        min="0"
+        max="2399609273"
+        value="2399609273"
+      /><br />
+
+      <label for="unemployment_above_15">Unemployment Above age 15:</label>
+      <input
+        type="range"
+        name="unemployment_above_15"
+        id="unemployment_above_15"
+        min="0"
+        max="100"
+        value="50"
+      /><br />
+
+      <label for="unemployment_between_15_24"
+        >Unemployment between age 15-24:</label
+      >
+      <input
+        type="range"
+        name="unemployment_between_15_24"
+        id="unemployment_between_15_24"
+        min="0"
+        max="100"
+        value="50"
+      /><br />
+
+      <label for="unemployment_above_25">Unemployment Above age 25+:</label>
+      <input
+        type="range"
+        name="unemployment_above_25"
+        id="unemployment_above_25"
+        min="0"
+        max="100"
+        value="50"
+      /><br />
+
+      <label for="share_of_agricultural_land"
+        >Share of agricultural land in South Africa 2000-2020 in
+        percentage:</label
+      >
+      <input
+        type="range"
+        name="share_of_agricultural_land"
+        id="share_of_agricultural_land"
+        min="0"
+        max="100"
+        value="50"
+      /><br />
+
+      <label for="people_employed_in_agriculture"
+        >People employed in agricultural sector in millions:</label
+      >
+      <input
+        type="range"
+        name="people_employed_in_agriculture"
+        id="people_employed_in_agriculture"
+        min="0"
+        max="200"
+        step="1"
+        value="5"
+      /><br />
+
+      <label for="total_employment_in_africa"
+        >Total employment in Africa 2010-2021(In Millions):</label
+      >
+      <input
+        type="range"
+        name="total_employment_in_africa"
+        id="total_employment_in_africa"
+        min="365"
+        max="700"
+        value="50"
+      /><br />
+
+      <label for="import_us_thousand">Imports Africa:</label>
+      <input
+        type="range"
+        name="import_us_thousand"
+        id="import_us_thousand"
+        min="64129944.02"
+        max="6412994004.02"
+        value="50"
+      /><br />
+
+      <label for="export_us_thousand">Exports Africa:</label>
+      <input
+        type="range"
+        name="export_us_thousand"
+        id="export_us_thousand"
+        min="48162177.52 "
+        max="6412994004.02"
+        value="50"
+      /><br />
+      <input id="storing_data" value="26" />
+      <button type="submit" id="updateButton">Submit</button>
     </form>
-    
+
     <div id="prediction-result"></div>
-    
+    <canvas id="myChart" width="400" height="300"></canvas>
+
     <script>
-        document.getElementById('prediction-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            // Get input values
-            const year = document.getElementById('year').value;
-            const population = document.getElementById('population').value;
-            const unemployment_above_15 = document.getElementById('unemployment_above_15').value;
-            const unemployment_between_15_24 = document.getElementById('unemployment_between_15_24').value;
-            const unemployment_above_25 = document.getElementById('unemployment_above_25').value;
-            const share_of_agricultural_land = document.getElementById('share_of_agricultural_land').value;
-            const people_employed_in_agriculture = document.getElementById('people_employed_in_agriculture').value;
-            const total_employment_in_africa = document.getElementById('total_employment_in_africa').value;
-            const import_us_thousand = document.getElementById('import_us_thousand').value;
-            const export_us_thousand = document.getElementById('export_us_thousand').value;
-            
-            // Send POST request to Flask app
-            fetch('/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: new URLSearchParams({
-                    year: year,
-                    population: population,
-                    unemployment_above_15: unemployment_above_15,
-                    unemployment_between_15_24: unemployment_between_15_24,
-                    unemployment_above_25: unemployment_above_25,
-                    share_of_agricultural_land: share_of_agricultural_land,
-                    people_employed_in_agriculture: people_employed_in_agriculture,
-                    total_employment_in_africa: total_employment_in_africa,
-                    import_us_thousand:import_us_thousand,
-                    export_us_thousand:export_us_thousand
-                }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Display prediction result
-                document.getElementById('prediction-result').innerText = `Predicted Output: ${data.prediction}`;
+      // Sample data for the line chart
+      const adata = [
+      25.16111111,
+        25.18619048,
+        25.21126984,
+        25.23634921,
+        25.26142857,
+        25.32142857,
+        25.40142857,
+
+      ];
+      const labels = [
+      2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+      ];
+      const data = {
+        labels: labels,
+        datasets: [
+          {
+            label: "My First Dataset",
+            data: adata,
+            fill: false,
+            borderColor: "rgb(75, 192, 192)",
+            tension: 0.1,
+          },
+        ],
+      };
+
+      const config = {
+        type: "line",
+        data: data,
+      };
+
+      document.addEventListener("DOMContentLoaded", function () {
+        var ctx = document.getElementById("myChart").getContext("2d");
+        var myChart = new Chart(ctx, config);
+        function updateChartData() {
+          console.log(document.getElementById("storing_data").value);
+          adata.push(document.getElementById("storing_data").value);
+          labels.push(labels[labels.length - 1] + 1);
+          myChart.data.datasets[0].data = adata;
+          myChart.data.labels = labels;
+          myChart.update();
+        }
+        document
+          .getElementById("updateButton")
+          .addEventListener("click", function () {
+            // const newData = [35, 50, 45, 60, 75, 70, 80]; // New data
+            setTimeout(updateChartData, 500);
+          });
+      });
+      //
+    </script>
+    //
+    <script>
+      document
+        .getElementById("prediction-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          // Get input values
+          const year = document.getElementById("year").value;
+          const population = document.getElementById("population").value;
+          const unemployment_above_15 = document.getElementById(
+            "unemployment_above_15"
+          ).value;
+          const unemployment_between_15_24 = document.getElementById(
+            "unemployment_between_15_24"
+          ).value;
+          const unemployment_above_25 = document.getElementById(
+            "unemployment_above_25"
+          ).value;
+          const share_of_agricultural_land = document.getElementById(
+            "share_of_agricultural_land"
+          ).value;
+          const people_employed_in_agriculture = document.getElementById(
+            "people_employed_in_agriculture"
+          ).value;
+          const total_employment_in_africa = document.getElementById(
+            "total_employment_in_africa"
+          ).value;
+          const import_us_thousand = document.getElementById(
+            "import_us_thousand"
+          ).value;
+          const export_us_thousand = document.getElementById(
+            "export_us_thousand"
+          ).value;
+
+          // Send POST request to Flask app
+          fetch("/", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams({
+              year: year,
+              population: population,
+              unemployment_above_15: unemployment_above_15,
+              unemployment_between_15_24: unemployment_between_15_24,
+              unemployment_above_25: unemployment_above_25,
+              share_of_agricultural_land: share_of_agricultural_land,
+              people_employed_in_agriculture: people_employed_in_agriculture,
+              total_employment_in_africa: total_employment_in_africa,
+              import_us_thousand: import_us_thousand,
+              export_us_thousand: export_us_thousand,
+            }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              // Display prediction result
+              document.getElementById(
+                "prediction-result"
+              ).innerText = `Predicted Output: ${data.prediction}`;
+              document.getElementById("storing_data").value = data.prediction;
             });
         });
     </script>
-</body>
+  </body>
 </html>
