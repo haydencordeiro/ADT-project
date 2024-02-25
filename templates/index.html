@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Prediction</title>
+</head>
+<body>
+    <h1>Machine Learning Prediction</h1>
+    <form id="prediction-form">
+        <label for="year">Year:</label>
+        <input type="number" name="year" id="year" min="2023" max="2040" required><br>
+        
+        <label for="population">Population:</label>
+        <input type="range" name="population" id="population" min="0" max="2399609273" value="2399609273"><br>
+        
+        <label for="unemployment_above_15">Unemployment Above age 15:</label>
+        <input type="range" name="unemployment_above_15" id="unemployment_above_15" min="0" max="100" value="50"><br>
+        
+        <label for="unemployment_between_15_24">Unemployment between age 15-24:</label>
+        <input type="range" name="unemployment_between_15_24" id="unemployment_between_15_24" min="0" max="100" value="50"><br>
+        
+        <label for="unemployment_above_25">Unemployment Above age 25+:</label>
+        <input type="range" name="unemployment_above_25" id="unemployment_above_25" min="0" max="100" value="50"><br>
+        
+        <label for="share_of_agricultural_land">Share of agricultural land in South Africa 2000-2020 in percentage:</label>
+        <input type="range" name="share_of_agricultural_land" id="share_of_agricultural_land" min="0" max="100" value="50"><br>
+        
+        <label for="people_employed_in_agriculture">People employed in agricultural sector in millions:</label>
+        <input type="range" name="people_employed_in_agriculture" id="people_employed_in_agriculture" min="0" max="200" step="1" value="5"><br>
+        
+        <label for="total_employment_in_africa">Total employment in Africa 2010-2021(In Millions):</label>
+        <input type="range" name="total_employment_in_africa" id="total_employment_in_africa" min="365" max="700" value="50"><br>
+        
+        <button type="submit">Submit</button>
+    </form>
+    
+    <div id="prediction-result"></div>
+    
+    <script>
+        document.getElementById('prediction-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Get input values
+            const year = document.getElementById('year').value;
+            const population = document.getElementById('population').value;
+            const unemployment_above_15 = document.getElementById('unemployment_above_15').value;
+            const unemployment_between_15_24 = document.getElementById('unemployment_between_15_24').value;
+            const unemployment_above_25 = document.getElementById('unemployment_above_25').value;
+            const share_of_agricultural_land = document.getElementById('share_of_agricultural_land').value;
+            const people_employed_in_agriculture = document.getElementById('people_employed_in_agriculture').value;
+            const total_employment_in_africa = document.getElementById('total_employment_in_africa').value;
+            
+            // Send POST request to Flask app
+            fetch('/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    year: year,
+                    population: population,
+                    unemployment_above_15: unemployment_above_15,
+                    unemployment_between_15_24: unemployment_between_15_24,
+                    unemployment_above_25: unemployment_above_25,
+                    share_of_agricultural_land: share_of_agricultural_land,
+                    people_employed_in_agriculture: people_employed_in_agriculture,
+                    total_employment_in_africa: total_employment_in_africa,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display prediction result
+                document.getElementById('prediction-result').innerText = `Predicted Output: ${data.prediction}`;
+            });
+        });
+    </script>
+</body>
+</html>
