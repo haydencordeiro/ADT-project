@@ -22,7 +22,7 @@
         id="year"
         min="2010"
         max="2040"
-        required
+        
       /><br />
 
       <label for="population">Population:</label>
@@ -124,6 +124,35 @@
         max="6412994004.02"
         value="3412994004"
       /><br />
+
+      <input
+        type="range"
+        name="net_official_development_assistance_and_aid"
+        id="net_official_development_assistance_and_aid"
+        min="0.52 "
+        max="6412994004.02"
+        value="3412994004"
+      /><br />
+
+
+      <input
+      type="range"
+      name="credit_received_from_other_countries_in_billions"
+      id="credit_received_from_other_countries_in_billions"
+      min="0.52 "
+      max="6412994004.02"
+      value="3412994004"
+    /><br />
+
+    <input
+    type="range"
+    name="gasoline"
+    id="gasoline"
+    min="0.52 "
+    max="6412994004.02"
+    value="3412994004"
+  /><br />
+
       <input id="storing_data" value="26" />
       <button type="submit" id="updateButton">Submit</button>
     </form>
@@ -198,7 +227,7 @@
           event.preventDefault();
 
           // Get input values
-          const year = document.getElementById("year").value;
+          // const year = document.getElementById("year").value;
           const population = document.getElementById("population").value;
           const unemployment_above_15 = document.getElementById(
             "unemployment_above_15"
@@ -224,6 +253,15 @@
           const export_us_thousand = document.getElementById(
             "export_us_thousand"
           ).value;
+          const net_official_development_assistance_and_aid = document.getElementById(
+            "net_official_development_assistance_and_aid"
+          ).value;
+          const credit_received_from_other_countries_in_billions = document.getElementById(
+            "credit_received_from_other_countries_in_billions"
+          ).value;
+          const gasoline = document.getElementById(
+            "gasoline"
+          ).value;
 
           // Send POST request to Flask app
           fetch("/", {
@@ -232,9 +270,7 @@
               "Content-Type": "application/x-www-form-urlencoded",
             },
             body: new URLSearchParams({
-              year: year,
               population: population,
-              unemployment_above_15: unemployment_above_15,
               unemployment_between_15_24: unemployment_between_15_24,
               unemployment_above_25: unemployment_above_25,
               share_of_agricultural_land: share_of_agricultural_land,
@@ -242,6 +278,10 @@
               total_employment_in_africa: total_employment_in_africa,
               import_us_thousand: import_us_thousand,
               export_us_thousand: export_us_thousand,
+              net_official_development_assistance_and_aid: net_official_development_assistance_and_aid,
+              credit_received_from_other_countries_in_billions: credit_received_from_other_countries_in_billions,
+              gasoline: gasoline,
+
             }),
           })
             .then((response) => response.json())
