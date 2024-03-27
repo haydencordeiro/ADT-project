@@ -15,35 +15,27 @@
   <body>
     <h1>Machine Learning Prediction</h1>
     <form id="prediction-form">
-      <label for="year">Year:</label>
-      <input
-        type="number"
-        name="year"
-        id="year"
-        min="2010"
-        max="2040"
-        
-      /><br />
+
 
       <label for="population">Population:</label>
       <input
         type="range"
         name="population"
         id="population"
-        min="0"
-        max="2399609273"
-        value="0"
+        min="270000000"
+        max="1400000000"
+        value="270000000"
       /><br />
 
-      <label for="unemployment_above_15">Unemployment Above age 15:</label>
+      <!-- <label for="unemployment_above_15">Unemployment Above age 15:</label>
       <input
         type="range"
         name="unemployment_above_15"
         id="unemployment_above_15"
-        min="0"
-        max="100"
-        value="50"
-      /><br />
+        min="8.5"
+        max="10.5"
+        value="8.5"
+      /><br /> -->
 
       <label for="unemployment_between_15_24"
         >Unemployment between age 15-24:</label
@@ -52,9 +44,9 @@
         type="range"
         name="unemployment_between_15_24"
         id="unemployment_between_15_24"
-        min="0"
-        max="100"
-        value="50"
+        min="15.5"
+        max="20"
+        value="15.5"
       /><br />
 
       <label for="unemployment_above_25">Unemployment Above age 25+:</label>
@@ -62,9 +54,9 @@
         type="range"
         name="unemployment_above_25"
         id="unemployment_above_25"
-        min="0"
-        max="100"
-        value="50"
+        min="5.5"
+        max="9"
+        value="5.5"
       /><br />
 
       <label for="share_of_agricultural_land"
@@ -75,9 +67,9 @@
         type="range"
         name="share_of_agricultural_land"
         id="share_of_agricultural_land"
-        min="0"
-        max="100"
-        value="50"
+        min="79"
+        max="84"
+        value="79"
       /><br />
 
       <label for="people_employed_in_agriculture"
@@ -87,10 +79,10 @@
         type="range"
         name="people_employed_in_agriculture"
         id="people_employed_in_agriculture"
-        min="0"
-        max="200"
+        min="40"
+        max="240"
         step="1"
-        value="100"
+        value="40"
       /><br />
 
       <label for="total_employment_in_africa"
@@ -100,9 +92,9 @@
         type="range"
         name="total_employment_in_africa"
         id="total_employment_in_africa"
-        min="365"
-        max="700"
-        value="450"
+        min="0.05"
+        max="500"
+        value="0.05"
       /><br />
 
       <label for="import_us_thousand">Imports Africa:</label>
@@ -110,9 +102,9 @@
         type="range"
         name="import_us_thousand"
         id="import_us_thousand"
-        min="0.02"
-        max="6412994004.02"
-        value="3412994004"
+        min="100000"
+        max="70000000"
+        value="100000"
       /><br />
 
       <label for="export_us_thousand">Exports Africa:</label>
@@ -120,37 +112,39 @@
         type="range"
         name="export_us_thousand"
         id="export_us_thousand"
-        min="0.52 "
-        max="6412994004.02"
-        value="3412994004"
+        min="50000"
+        max="80000000"
+        value="50000"
       /><br />
+      <label for="net_official_development_assistance_and_aid">net_official_development_assistance_and_aid:</label>
 
       <input
         type="range"
         name="net_official_development_assistance_and_aid"
         id="net_official_development_assistance_and_aid"
-        min="0.52 "
-        max="6412994004.02"
-        value="3412994004"
+        min="0.5 "
+        max="70"
+        value="0.5"
       /><br />
 
+      <label for="credit_received_from_other_countries_in_billions">credit_received_from_other_countries_in_billions:</label>
 
       <input
       type="range"
       name="credit_received_from_other_countries_in_billions"
       id="credit_received_from_other_countries_in_billions"
-      min="0.52 "
-      max="6412994004.02"
-      value="3412994004"
+      min="5000 "
+      max="90000"
+      value="5000"
     /><br />
-
+    <label for="gasoline">gasoline:</label>
     <input
     type="range"
     name="gasoline"
     id="gasoline"
-    min="0.52 "
-    max="6412994004.02"
-    value="3412994004"
+    min="0.01"
+    max="1.5"
+    value="0.01"
   /><br />
 
       <input id="storing_data" value="26" />
@@ -163,23 +157,24 @@
     <script>
       // Sample data for the line chart
       const adata = [
-      25.16111111,
-        25.18619048,
-        25.21126984,
-        25.23634921,
-        25.26142857,
-        25.32142857,
-        25.40142857,
+        0
+      // 25.16111111,
+      //   25.18619048,
+      //   25.21126984,
+      //   25.23634921,
+      //   25.26142857,
+      //   25.32142857,
+      //   25.40142857,
 
       ];
       const labels = [
       2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
+      //   2017,
+      //   2018,
+      //   2019,
+      //   2020,
+      //   2021,
+      //   2022,
       ];
       const data = {
         labels: labels,
@@ -229,9 +224,9 @@
           // Get input values
           // const year = document.getElementById("year").value;
           const population = document.getElementById("population").value;
-          const unemployment_above_15 = document.getElementById(
-            "unemployment_above_15"
-          ).value;
+          // const unemployment_above_15 = document.getElementById(
+          //   "unemployment_above_15"
+          // ).value;
           const unemployment_between_15_24 = document.getElementById(
             "unemployment_between_15_24"
           ).value;
