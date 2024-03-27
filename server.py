@@ -3,7 +3,7 @@ import joblib
 from sklearn.preprocessing import StandardScaler
 
 # Step 1: Scale or normalize your features
-scaler = StandardScaler()
+# scaler = StandardScaler()
 loaded_model = joblib.load('random_forest_model_new.pkl')
 
 # print(loaded_model.predict([[2.01000000e+03,1020662522, 9.21147059e+00, 1.79620294e+01,
@@ -34,7 +34,7 @@ def index():
         gasoline = float(request.form['gasoline'])
         
         # Make prediction using your model
-        prediction = loaded_model.predict(scaler.fit_transform([[ population, unemployment_between_15_24, unemployment_above_25, share_of_agricultural_land, people_employed_in_agriculture, total_employment_in_africa, import_us_thousand, export_us_thousand, net_official_development_assistance_and_aid, credit_received_from_other_countries_in_billions, gasoline]]))
+        prediction = loaded_model.predict([[ population, unemployment_between_15_24, unemployment_above_25, share_of_agricultural_land, people_employed_in_agriculture, total_employment_in_africa, import_us_thousand, export_us_thousand, net_official_development_assistance_and_aid, credit_received_from_other_countries_in_billions, gasoline]])
         print("hasdf" ,prediction)
         
         # Return the predicted value as JSON
