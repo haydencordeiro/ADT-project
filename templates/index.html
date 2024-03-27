@@ -8,60 +8,79 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ML Prediction</title>
   <style>
-    canvas {
-      border: 1px solid #000;
+    body {
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      background-color: #000000;
+      color: #fefffe;
+      height: 95vh;
     }
-    .container{
+
+    canvas {
+      /* border: 1px solid #000; */
+      padding: 2rem;
+
+    }
+
+    .container {
       /* background-color: red; */
       display: flex;
       max-height: 90vh;
       justify-content: space-evenly;
-      
+      background-color: #333333;
+      max-width: 95%;
+      border-radius: 5px;
+
     }
-    #prediction-form{
+
+    #prediction-form {
       /* background-color: aqua; */
       min-width: 400px;
       margin: 1rem;
 
     }
-    #myChart{
+
+    #myChart {
       /* background-color: blueviolet; */
     }
-    h1 {
-        text-align: center;
-      }
-  
 
-  
-      label {
-        display: block;
-        margin-bottom: 5px;
-      }
-  
-      input[type="range"] {
-        width: 100%;
-      }
-  
-      button {
-        display: block;
-        width: 100%;
-        margin-top: 10px;
-        padding: 10px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        cursor: pointer;
-      }
-  
-      button:hover {
-        background-color: #0056b3;
-      }
-  
+    h1 {
+      text-align: center;
+    }
+
+
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #7a3d8b;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+
+    }
+
+    button:hover {
+      background-color: #8827a2;
+    }
   </style>
 </head>
 
 <body>
-  <h2 style="text-align: center;">Machine Learning Prediction</h2 style="text-align: center;">
   <div class="container">
     <form id="prediction-form">
 
@@ -119,7 +138,7 @@
       <label for="gasoline">gasoline:</label>
       <input type="range" name="gasoline" id="gasoline" min="0.01" max="1.5" value="1.5" /><br />
 
-      <input id="storing_data" value="26"  style="display: none !important;"/>
+      <input id="storing_data" value="26" style="display: none !important;" />
       <button type="submit" id="updateButton">Submit</button>
       <div id="prediction-result"></div>
     </form>
@@ -132,7 +151,7 @@
   <script>
     // Sample data for the line chart
     const adata = [
-    270000000
+      270000000
       // 25.16111111,
       //   25.18619048,
       //   25.21126984,
@@ -155,20 +174,45 @@
       labels: labels,
       datasets: [
         {
-          label: "My First Dataset",
+          label: "Predicted Value",
           data: adata,
-          fill: false,
-          borderColor: "rgb(75, 192, 192)",
+          fill: true,
+          borderColor: "rgb(182,88,91)",
           tension: 0.1,
         },
       ],
     };
-
     const config = {
-      type: "line",
-      data: data,
-    };
-
+        type: "line",
+        data: data,
+        options: {
+          scales: {
+            y: {
+              ticks: {
+                color: 'white' // Change y-axis text color to white
+              },
+              grid: {
+                color: 'rgba(200, 200, 200, 0.5)' // Change y-axis grid color to light grey
+              }
+            },
+            x: {
+              ticks: {
+                color: 'white' // Change x-axis text color to white
+              },
+              grid: {
+                color: 'rgba(200, 200, 200, 0.5)' // Change x-axis grid color to light grey
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: 'white' // Change legend text color to white
+              }
+            }
+          }
+        }
+      };
     document.addEventListener("DOMContentLoaded", function () {
       var ctx = document.getElementById("myChart").getContext("2d");
       var myChart = new Chart(ctx, config);
@@ -191,7 +235,7 @@
     });
     //
   </script>
-  //
+
   <script>
     document
       .getElementById("prediction-form")
