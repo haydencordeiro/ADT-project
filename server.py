@@ -4,7 +4,7 @@ from sklearn.preprocessing import StandardScaler
 
 # Step 1: Scale or normalize your features
 # scaler = StandardScaler()
-loaded_model = joblib.load('random_forest_model_new.pkl')
+loaded_model = joblib.load('linear_regression_model_new.pkl')
 
 # print(loaded_model.predict([[2.01000000e+03,1020662522, 9.21147059e+00, 1.79620294e+01,
 #        7.02976471e+00, 7.98700000e+01, 1.93850000e+02, 3.65500000e+02]]))
@@ -34,6 +34,7 @@ def index():
         gasoline = float(request.form['gasoline'])
         
         # Make prediction using your model
+        print([[ population, unemployment_between_15_24, unemployment_above_25, share_of_agricultural_land, people_employed_in_agriculture, total_employment_in_africa, import_us_thousand, export_us_thousand, net_official_development_assistance_and_aid, credit_received_from_other_countries_in_billions, gasoline]])
         prediction = loaded_model.predict([[ population, unemployment_between_15_24, unemployment_above_25, share_of_agricultural_land, people_employed_in_agriculture, total_employment_in_africa, import_us_thousand, export_us_thousand, net_official_development_assistance_and_aid, credit_received_from_other_countries_in_billions, gasoline]])
         print("hasdf" ,prediction)
         
