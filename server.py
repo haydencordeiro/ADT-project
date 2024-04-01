@@ -4,7 +4,7 @@ from sklearn.preprocessing import StandardScaler
 
 # Step 1: Scale or normalize your features
 # scaler = StandardScaler()
-loaded_model = joblib.load('linear_regression_model_new.pkl')
+loaded_model = joblib.load('Model_Final_27_03.pkl')
 
 # print(loaded_model.predict([[2.01000000e+03,1020662522, 9.21147059e+00, 1.79620294e+01,
 #        7.02976471e+00, 7.98700000e+01, 1.93850000e+02, 3.65500000e+02]]))
