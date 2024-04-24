@@ -41,8 +41,13 @@ The results of TeraFeed's analysis provide valuable insights into the drivers of
 TeraFeed represents a significant advancement in the fight against hunger in Africa, offering a data-driven approach to understanding and addressing food insecurity. By leveraging predictive analytics and interactive visualization, the project empowers stakeholders to make informed decisions and work towards sustainable solutions. TeraFeed envisions a future where hunger is eradicated, and African communities thrive economically and socially.
 
 
-## Screenshots
+## Demo
 
+[![DEMO](https://img.youtube.com/vi/zODUeJfcSGw/0.jpg)](https://www.youtube.com/watch?v=zODUeJfcSGw)
+
+
+## Screenshots
+<img src="./image.png" width="60%" /> <br>
 <img src="./screenshots/1.jpg" width="60%" /> <br>
 <img src="./screenshots/2.png" width="60%" />
 
